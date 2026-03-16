@@ -1,0 +1,11 @@
+#include <stdio.h>
+#include "xil_printf.h"
+
+int main(void)
+{
+	for(;;)
+	{
+		xil_printf("hello world!\n");
+		delay(100);
+	}
+}
