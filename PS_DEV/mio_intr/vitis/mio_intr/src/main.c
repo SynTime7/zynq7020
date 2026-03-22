@@ -42,6 +42,10 @@ int main()
     Status = axi_gpio_init();
     assert(Status == XST_SUCCESS);
 
+    // 初始化UART
+    Status = uart_init();
+    assert(Status == XST_SUCCESS);
+
     int flag = 0;
     while (1)
     {

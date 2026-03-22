@@ -215,6 +215,29 @@
 
 /******************************************************************/
 
+/* Definitions for driver GPIO */
+#define XPAR_XGPIO_NUM_INSTANCES 1
+
+/* Definitions for peripheral AXI_GPIO_0 */
+#define XPAR_AXI_GPIO_0_BASEADDR 0x41200000
+#define XPAR_AXI_GPIO_0_HIGHADDR 0x4120FFFF
+#define XPAR_AXI_GPIO_0_DEVICE_ID 0
+#define XPAR_AXI_GPIO_0_INTERRUPT_PRESENT 1
+#define XPAR_AXI_GPIO_0_IS_DUAL 0
+
+
+/******************************************************************/
+
+/* Canonical definitions for peripheral AXI_GPIO_0 */
+#define XPAR_GPIO_0_BASEADDR 0x41200000
+#define XPAR_GPIO_0_HIGHADDR 0x4120FFFF
+#define XPAR_GPIO_0_DEVICE_ID XPAR_AXI_GPIO_0_DEVICE_ID
+#define XPAR_GPIO_0_INTERRUPT_PRESENT 1
+#define XPAR_GPIO_0_IS_DUAL 0
+
+
+/******************************************************************/
+
 /* Definitions for driver GPIOPS */
 #define XPAR_XGPIOPS_NUM_INSTANCES 1
 
@@ -231,6 +254,16 @@
 #define XPAR_XGPIOPS_0_BASEADDR 0xE000A000
 #define XPAR_XGPIOPS_0_HIGHADDR 0xE000AFFF
 
+
+/******************************************************************/
+
+/* Definitions for Fabric interrupts connected to ps7_scugic_0 */
+#define XPAR_FABRIC_AXI_GPIO_0_IP2INTC_IRPT_INTR 61U
+
+/******************************************************************/
+
+/* Canonical definitions for Fabric interrupts connected to ps7_scugic_0 */
+#define XPAR_FABRIC_GPIO_0_VEC_ID XPAR_FABRIC_AXI_GPIO_0_IP2INTC_IRPT_INTR
 
 /******************************************************************/
 

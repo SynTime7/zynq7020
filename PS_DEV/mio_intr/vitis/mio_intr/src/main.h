@@ -13,10 +13,13 @@ extern "C"
 #include "xparameters.h"
 #include "platform.h"
 #include "xil_printf.h"
-#include "dido/dido.h"
 #include "xscugic.h"
 #include "xgpiops.h"
 #include "xgpio.h"
+#include "xuartps.h"
+
+#include "dido/dido.h"
+#include "uart/uart.h"
 
     extern XScuGic InterruptController;
 
