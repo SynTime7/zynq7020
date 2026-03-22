@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7z020clg400-2" LaunchTime="1774097266" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/zynq7020_wrapper.dcp">
+<GenRun Id="synth_1" LaunchPart="xc7z020clg400-2" LaunchTime="1774150103" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/zynq7020_wrapper.dcp">
   <File Type="PA-TCL" Name="zynq7020_wrapper.tcl"/>
   <File Type="RDS-PROPCONSTRS" Name="zynq7020_wrapper_drc_synth.rpt"/>
   <File Type="REPORTS-TCL" Name="zynq7020_wrapper_reports.tcl"/>
@@ -64,6 +64,5 @@
   </Strategy>
   <BlockFileSet Type="BlockSrcs" Name="zynq7020_axi_gpio_0_0"/>
   <BlockFileSet Type="BlockSrcs" Name="zynq7020_processing_system7_0_0"/>
-  <BlockFileSet Type="BlockSrcs" Name="zynq7020_auto_pc_0"/>
   <BlockFileSet Type="BlockSrcs" Name="zynq7020_rst_ps7_0_50M_0"/>
 </GenRun>

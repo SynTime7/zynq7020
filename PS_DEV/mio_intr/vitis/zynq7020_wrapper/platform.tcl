@@ -24,3 +24,22 @@ platform generate -domains standalone_ps7_cortexa9_0
 platform active {zynq7020_wrapper}
 platform config -updatehw {D:/workspace/workspace_zynq/zynq7020/PS_DEV/mio_intr/zynq7020_wrapper.xsa}
 platform generate -domains 
+platform generate -domains standalone_ps7_cortexa9_0,zynq_fsbl 
+platform active {zynq7020_wrapper}
+platform config -updatehw {D:/workspace/workspace_zynq/zynq7020/PS_DEV/mio_intr/zynq7020_wrapper.xsa}
+platform generate -domains 
+platform config -updatehw {D:/workspace/workspace_zynq/zynq7020/PS_DEV/mio_intr/zynq7020_wrapper.xsa}
+platform clean
+domain active {zynq_fsbl}
+bsp reload
+domain active {standalone_ps7_cortexa9_0}
+bsp reload
+bsp reload
+platform generate
+bsp reload
+domain active {zynq_fsbl}
+bsp reload
+domain active {standalone_ps7_cortexa9_0}
+bsp reload
+platform generate -domains 
+bsp reload

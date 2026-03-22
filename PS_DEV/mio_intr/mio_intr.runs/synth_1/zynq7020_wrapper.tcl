@@ -92,10 +92,10 @@ set_property used_in_implementation false [get_files -all d:/workspace/workspace
 set_property used_in_implementation false [get_files -all d:/workspace/workspace_zynq/zynq7020/PS_DEV/mio_intr/mio_intr.gen/sources_1/bd/zynq7020/ip/zynq7020_axi_gpio_0_0/zynq7020_axi_gpio_0_0_board.xdc]
 set_property used_in_implementation false [get_files -all d:/workspace/workspace_zynq/zynq7020/PS_DEV/mio_intr/mio_intr.gen/sources_1/bd/zynq7020/ip/zynq7020_axi_gpio_0_0/zynq7020_axi_gpio_0_0_ooc.xdc]
 set_property used_in_implementation false [get_files -all d:/workspace/workspace_zynq/zynq7020/PS_DEV/mio_intr/mio_intr.gen/sources_1/bd/zynq7020/ip/zynq7020_axi_gpio_0_0/zynq7020_axi_gpio_0_0.xdc]
-set_property used_in_implementation false [get_files -all d:/workspace/workspace_zynq/zynq7020/PS_DEV/mio_intr/mio_intr.gen/sources_1/bd/zynq7020/ip/zynq7020_auto_pc_0/zynq7020_auto_pc_0_ooc.xdc]
 set_property used_in_implementation false [get_files -all d:/workspace/workspace_zynq/zynq7020/PS_DEV/mio_intr/mio_intr.gen/sources_1/bd/zynq7020/ip/zynq7020_rst_ps7_0_50M_0/zynq7020_rst_ps7_0_50M_0_board.xdc]
 set_property used_in_implementation false [get_files -all d:/workspace/workspace_zynq/zynq7020/PS_DEV/mio_intr/mio_intr.gen/sources_1/bd/zynq7020/ip/zynq7020_rst_ps7_0_50M_0/zynq7020_rst_ps7_0_50M_0.xdc]
 set_property used_in_implementation false [get_files -all d:/workspace/workspace_zynq/zynq7020/PS_DEV/mio_intr/mio_intr.gen/sources_1/bd/zynq7020/ip/zynq7020_rst_ps7_0_50M_0/zynq7020_rst_ps7_0_50M_0_ooc.xdc]
+set_property used_in_implementation false [get_files -all d:/workspace/workspace_zynq/zynq7020/PS_DEV/mio_intr/mio_intr.gen/sources_1/bd/zynq7020/ip/zynq7020_auto_pc_0/zynq7020_auto_pc_0_ooc.xdc]
 set_property used_in_implementation false [get_files -all d:/workspace/workspace_zynq/zynq7020/PS_DEV/mio_intr/mio_intr.gen/sources_1/bd/zynq7020/zynq7020_ooc.xdc]
 
 OPTRACE "Adding files" END { }

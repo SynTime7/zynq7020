@@ -61,6 +61,12 @@ module zynq7020_processing_system7_0_0 (
   GPIO_I,
   GPIO_O,
   GPIO_T,
+  TTC0_WAVE0_OUT,
+  TTC0_WAVE1_OUT,
+  TTC0_WAVE2_OUT,
+  TTC1_WAVE0_OUT,
+  TTC1_WAVE1_OUT,
+  TTC1_WAVE2_OUT,
   M_AXI_GP0_ARVALID,
   M_AXI_GP0_AWVALID,
   M_AXI_GP0_BREADY,
@@ -132,6 +138,12 @@ input wire [1 : 0] GPIO_I;
 output wire [1 : 0] GPIO_O;
 (* X_INTERFACE_INFO = "xilinx.com:interface:gpio:1.0 GPIO_0 TRI_T" *)
 output wire [1 : 0] GPIO_T;
+output wire TTC0_WAVE0_OUT;
+output wire TTC0_WAVE1_OUT;
+output wire TTC0_WAVE2_OUT;
+output wire TTC1_WAVE0_OUT;
+output wire TTC1_WAVE1_OUT;
+output wire TTC1_WAVE2_OUT;
 (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 M_AXI_GP0 ARVALID" *)
 output wire M_AXI_GP0_ARVALID;
 (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 M_AXI_GP0 AWVALID" *)
@@ -468,15 +480,15 @@ inout wire PS_PORB;
     .UART1_DSRN(1'B0),
     .UART1_RIN(1'B0),
     .UART1_RX(1'B1),
-    .TTC0_WAVE0_OUT(),
-    .TTC0_WAVE1_OUT(),
-    .TTC0_WAVE2_OUT(),
+    .TTC0_WAVE0_OUT(TTC0_WAVE0_OUT),
+    .TTC0_WAVE1_OUT(TTC0_WAVE1_OUT),
+    .TTC0_WAVE2_OUT(TTC0_WAVE2_OUT),
     .TTC0_CLK0_IN(1'B0),
     .TTC0_CLK1_IN(1'B0),
     .TTC0_CLK2_IN(1'B0),
-    .TTC1_WAVE0_OUT(),
-    .TTC1_WAVE1_OUT(),
-    .TTC1_WAVE2_OUT(),
+    .TTC1_WAVE0_OUT(TTC1_WAVE0_OUT),
+    .TTC1_WAVE1_OUT(TTC1_WAVE1_OUT),
+    .TTC1_WAVE2_OUT(TTC1_WAVE2_OUT),
     .TTC1_CLK0_IN(1'B0),
     .TTC1_CLK1_IN(1'B0),
     .TTC1_CLK2_IN(1'B0),

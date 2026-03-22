@@ -12,13 +12,13 @@ set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==zynq7020_pr
 # IP: bd/zynq7020/ip/zynq7020_axi_gpio_0_0/zynq7020_axi_gpio_0_0.xci
 set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==zynq7020_axi_gpio_0_0 || ORIG_REF_NAME==zynq7020_axi_gpio_0_0} -quiet] -quiet
 
-# IP: bd/zynq7020/ip/zynq7020_auto_pc_0/zynq7020_auto_pc_0.xci
-set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==zynq7020_auto_pc_0 || ORIG_REF_NAME==zynq7020_auto_pc_0} -quiet] -quiet
-
 # IP: bd/zynq7020/ip/zynq7020_ps7_0_axi_periph_0/zynq7020_ps7_0_axi_periph_0.xci
 set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==zynq7020_ps7_0_axi_periph_0 || ORIG_REF_NAME==zynq7020_ps7_0_axi_periph_0} -quiet] -quiet
 
 # IP: bd/zynq7020/ip/zynq7020_rst_ps7_0_50M_0/zynq7020_rst_ps7_0_50M_0.xci
 set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==zynq7020_rst_ps7_0_50M_0 || ORIG_REF_NAME==zynq7020_rst_ps7_0_50M_0} -quiet] -quiet
+
+# IP: bd/zynq7020/ip/zynq7020_auto_pc_0/zynq7020_auto_pc_0.xci
+set_property KEEP_HIERARCHY SOFT [get_cells -hier -filter {REF_NAME==zynq7020_auto_pc_0 || ORIG_REF_NAME==zynq7020_auto_pc_0} -quiet] -quiet
 
 # XDC: d:/workspace/workspace_zynq/zynq7020/PS_DEV/mio_intr/mio_intr.gen/sources_1/bd/zynq7020/zynq7020_ooc.xdc

@@ -11,12 +11,12 @@ vlib activehdl/axi_lite_ipif_v3_0_4
 vlib activehdl/lib_cdc_v1_0_2
 vlib activehdl/interrupt_control_v3_1_4
 vlib activehdl/axi_gpio_v2_0_29
+vlib activehdl/proc_sys_reset_v5_0_13
 vlib activehdl/generic_baseblocks_v2_1_0
 vlib activehdl/fifo_generator_v13_2_7
 vlib activehdl/axi_data_fifo_v2_1_26
 vlib activehdl/axi_register_slice_v2_1_27
 vlib activehdl/axi_protocol_converter_v2_1_27
-vlib activehdl/proc_sys_reset_v5_0_13
 
 vmap xilinx_vip activehdl/xilinx_vip
 vmap xpm activehdl/xpm
@@ -28,12 +28,12 @@ vmap axi_lite_ipif_v3_0_4 activehdl/axi_lite_ipif_v3_0_4
 vmap lib_cdc_v1_0_2 activehdl/lib_cdc_v1_0_2
 vmap interrupt_control_v3_1_4 activehdl/interrupt_control_v3_1_4
 vmap axi_gpio_v2_0_29 activehdl/axi_gpio_v2_0_29
+vmap proc_sys_reset_v5_0_13 activehdl/proc_sys_reset_v5_0_13
 vmap generic_baseblocks_v2_1_0 activehdl/generic_baseblocks_v2_1_0
 vmap fifo_generator_v13_2_7 activehdl/fifo_generator_v13_2_7
 vmap axi_data_fifo_v2_1_26 activehdl/axi_data_fifo_v2_1_26
 vmap axi_register_slice_v2_1_27 activehdl/axi_register_slice_v2_1_27
 vmap axi_protocol_converter_v2_1_27 activehdl/axi_protocol_converter_v2_1_27
-vmap proc_sys_reset_v5_0_13 activehdl/proc_sys_reset_v5_0_13
 
 vlog -work xilinx_vip  -sv2k12 "+incdir+D:/Xilinx/Vivado/2022.2/data/xilinx_vip/include" \
 "D:/Xilinx/Vivado/2022.2/data/xilinx_vip/hdl/axi4stream_vip_axi4streampc.sv" \
@@ -64,7 +64,6 @@ vlog -work processing_system7_vip_v1_0_15  -sv2k12 "+incdir+../../../../mio_intr
 
 vlog -work xil_defaultlib  -v2k5 "+incdir+../../../../mio_intr.gen/sources_1/bd/zynq7020/ipshared/ec67/hdl" "+incdir+../../../../mio_intr.gen/sources_1/bd/zynq7020/ipshared/ee60/hdl" "+incdir+D:/Xilinx/Vivado/2022.2/data/xilinx_vip/include" \
 "../../../../mio_intr.gen/sources_1/bd/zynq7020/ip/zynq7020_processing_system7_0_0/sim/zynq7020_processing_system7_0_0.v" \
-"../../../../mio_intr.gen/sources_1/bd/zynq7020/sim/zynq7020.v" \
 
 vcom -work axi_lite_ipif_v3_0_4 -93  \
 "../../../../mio_intr.gen/sources_1/bd/zynq7020/ipshared/66ea/hdl/axi_lite_ipif_v3_0_vh_rfs.vhd" \
@@ -80,6 +79,15 @@ vcom -work axi_gpio_v2_0_29 -93  \
 
 vcom -work xil_defaultlib -93  \
 "../../../../mio_intr.gen/sources_1/bd/zynq7020/ip/zynq7020_axi_gpio_0_0/sim/zynq7020_axi_gpio_0_0.vhd" \
+
+vcom -work proc_sys_reset_v5_0_13 -93  \
+"../../../../mio_intr.gen/sources_1/bd/zynq7020/ipshared/8842/hdl/proc_sys_reset_v5_0_vh_rfs.vhd" \
+
+vcom -work xil_defaultlib -93  \
+"../../../../mio_intr.gen/sources_1/bd/zynq7020/ip/zynq7020_rst_ps7_0_50M_0/sim/zynq7020_rst_ps7_0_50M_0.vhd" \
+
+vlog -work xil_defaultlib  -v2k5 "+incdir+../../../../mio_intr.gen/sources_1/bd/zynq7020/ipshared/ec67/hdl" "+incdir+../../../../mio_intr.gen/sources_1/bd/zynq7020/ipshared/ee60/hdl" "+incdir+D:/Xilinx/Vivado/2022.2/data/xilinx_vip/include" \
+"../../../../mio_intr.gen/sources_1/bd/zynq7020/sim/zynq7020.v" \
 
 vlog -work generic_baseblocks_v2_1_0  -v2k5 "+incdir+../../../../mio_intr.gen/sources_1/bd/zynq7020/ipshared/ec67/hdl" "+incdir+../../../../mio_intr.gen/sources_1/bd/zynq7020/ipshared/ee60/hdl" "+incdir+D:/Xilinx/Vivado/2022.2/data/xilinx_vip/include" \
 "../../../../mio_intr.gen/sources_1/bd/zynq7020/ipshared/b752/hdl/generic_baseblocks_v2_1_vl_rfs.v" \
@@ -104,12 +112,6 @@ vlog -work axi_protocol_converter_v2_1_27  -v2k5 "+incdir+../../../../mio_intr.g
 
 vlog -work xil_defaultlib  -v2k5 "+incdir+../../../../mio_intr.gen/sources_1/bd/zynq7020/ipshared/ec67/hdl" "+incdir+../../../../mio_intr.gen/sources_1/bd/zynq7020/ipshared/ee60/hdl" "+incdir+D:/Xilinx/Vivado/2022.2/data/xilinx_vip/include" \
 "../../../../mio_intr.gen/sources_1/bd/zynq7020/ip/zynq7020_auto_pc_0/sim/zynq7020_auto_pc_0.v" \
-
-vcom -work proc_sys_reset_v5_0_13 -93  \
-"../../../../mio_intr.gen/sources_1/bd/zynq7020/ipshared/8842/hdl/proc_sys_reset_v5_0_vh_rfs.vhd" \
-
-vcom -work xil_defaultlib -93  \
-"../../../../mio_intr.gen/sources_1/bd/zynq7020/ip/zynq7020_rst_ps7_0_50M_0/sim/zynq7020_rst_ps7_0_50M_0.vhd" \
 
 vlog -work xil_defaultlib \
 "glbl.v"

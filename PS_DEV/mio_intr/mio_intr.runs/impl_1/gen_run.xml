@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="impl_1" LaunchPart="xc7z020clg400-2" LaunchTime="1774097541">
-  <File Type="OPT-HWDEF" Name="zynq7020_wrapper.hwdef"/>
-  <File Type="ROUTE-BUS-SKEW" Name="zynq7020_wrapper_bus_skew_routed.rpt"/>
-  <File Type="PA-DCP" Name="zynq7020_wrapper.dcp"/>
+<GenRun Id="impl_1" LaunchPart="xc7z020clg400-2" LaunchTime="1774150178">
   <File Type="ROUTE-PWR" Name="zynq7020_wrapper_power_routed.rpt"/>
   <File Type="PA-TCL" Name="zynq7020_wrapper.tcl"/>
   <File Type="BITSTR-MMI" Name="zynq7020_wrapper.mmi"/>
@@ -13,6 +10,7 @@
   <File Type="OPT-TIMING" Name="zynq7020_wrapper_timing_summary_opted.rpt"/>
   <File Type="OPT-DCP" Name="zynq7020_wrapper_opt.dcp"/>
   <File Type="OPT-DRC" Name="zynq7020_wrapper_drc_opted.rpt"/>
+  <File Type="OPT-HWDEF" Name="zynq7020_wrapper.hwdef"/>
   <File Type="PWROPT-DCP" Name="zynq7020_wrapper_pwropt.dcp"/>
   <File Type="PWROPT-DRC" Name="zynq7020_wrapper_drc_pwropted.rpt"/>
   <File Type="PWROPT-TIMING" Name="zynq7020_wrapper_timing_summary_pwropted.rpt"/>
@@ -50,6 +48,7 @@
   <File Type="ROUTE-TIMING-RPX" Name="zynq7020_wrapper_timing_summary_routed.rpx"/>
   <File Type="ROUTE-SIMILARITY" Name="zynq7020_wrapper_incremental_reuse_routed.rpt"/>
   <File Type="ROUTE-CLK" Name="zynq7020_wrapper_clock_utilization_routed.rpt"/>
+  <File Type="ROUTE-BUS-SKEW" Name="zynq7020_wrapper_bus_skew_routed.rpt"/>
   <File Type="ROUTE-BUS-SKEW-PB" Name="zynq7020_wrapper_bus_skew_routed.pb"/>
   <File Type="ROUTE-BUS-SKEW-RPX" Name="zynq7020_wrapper_bus_skew_routed.rpx"/>
   <File Type="POSTROUTE-PHYSOPT-DCP" Name="zynq7020_wrapper_postroute_physopt.dcp"/>
@@ -143,6 +142,5 @@
   </Strategy>
   <BlockFileSet Type="BlockSrcs" Name="zynq7020_axi_gpio_0_0"/>
   <BlockFileSet Type="BlockSrcs" Name="zynq7020_processing_system7_0_0"/>
-  <BlockFileSet Type="BlockSrcs" Name="zynq7020_auto_pc_0"/>
   <BlockFileSet Type="BlockSrcs" Name="zynq7020_rst_ps7_0_50M_0"/>
 </GenRun>

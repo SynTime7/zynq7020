@@ -27,7 +27,6 @@
 -endlib
 -makelib xcelium_lib/xil_defaultlib \
   "../../../../mio_intr.gen/sources_1/bd/zynq7020/ip/zynq7020_processing_system7_0_0/sim/zynq7020_processing_system7_0_0.v" \
-  "../../../../mio_intr.gen/sources_1/bd/zynq7020/sim/zynq7020.v" \
 -endlib
 -makelib xcelium_lib/axi_lite_ipif_v3_0_4 \
   "../../../../mio_intr.gen/sources_1/bd/zynq7020/ipshared/66ea/hdl/axi_lite_ipif_v3_0_vh_rfs.vhd" \
@@ -43,6 +42,15 @@
 -endlib
 -makelib xcelium_lib/xil_defaultlib \
   "../../../../mio_intr.gen/sources_1/bd/zynq7020/ip/zynq7020_axi_gpio_0_0/sim/zynq7020_axi_gpio_0_0.vhd" \
+-endlib
+-makelib xcelium_lib/proc_sys_reset_v5_0_13 \
+  "../../../../mio_intr.gen/sources_1/bd/zynq7020/ipshared/8842/hdl/proc_sys_reset_v5_0_vh_rfs.vhd" \
+-endlib
+-makelib xcelium_lib/xil_defaultlib \
+  "../../../../mio_intr.gen/sources_1/bd/zynq7020/ip/zynq7020_rst_ps7_0_50M_0/sim/zynq7020_rst_ps7_0_50M_0.vhd" \
+-endlib
+-makelib xcelium_lib/xil_defaultlib \
+  "../../../../mio_intr.gen/sources_1/bd/zynq7020/sim/zynq7020.v" \
 -endlib
 -makelib xcelium_lib/generic_baseblocks_v2_1_0 \
   "../../../../mio_intr.gen/sources_1/bd/zynq7020/ipshared/b752/hdl/generic_baseblocks_v2_1_vl_rfs.v" \
@@ -67,12 +75,6 @@
 -endlib
 -makelib xcelium_lib/xil_defaultlib \
   "../../../../mio_intr.gen/sources_1/bd/zynq7020/ip/zynq7020_auto_pc_0/sim/zynq7020_auto_pc_0.v" \
--endlib
--makelib xcelium_lib/proc_sys_reset_v5_0_13 \
-  "../../../../mio_intr.gen/sources_1/bd/zynq7020/ipshared/8842/hdl/proc_sys_reset_v5_0_vh_rfs.vhd" \
--endlib
--makelib xcelium_lib/xil_defaultlib \
-  "../../../../mio_intr.gen/sources_1/bd/zynq7020/ip/zynq7020_rst_ps7_0_50M_0/sim/zynq7020_rst_ps7_0_50M_0.vhd" \
 -endlib
 -makelib xcelium_lib/xil_defaultlib \
   glbl.v

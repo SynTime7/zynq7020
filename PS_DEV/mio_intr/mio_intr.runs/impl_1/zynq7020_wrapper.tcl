@@ -123,13 +123,35 @@ set ACTIVE_STEP init_design
 set rc [catch {
   create_msg_db init_design.pb
   set_param chipscope.maxJobs 3
-  reset_param project.defaultXPMLibraries 
-  open_checkpoint D:/workspace/workspace_zynq/zynq7020/PS_DEV/mio_intr/mio_intr.runs/impl_1/zynq7020_wrapper.dcp
+OPTRACE "create in-memory project" START { }
+  create_project -in_memory -part xc7z020clg400-2
+  set_property design_mode GateLvl [current_fileset]
+  set_param project.singleFileAddWarning.threshold 0
+OPTRACE "create in-memory project" END { }
+OPTRACE "set parameters" START { }
   set_property webtalk.parent_dir D:/workspace/workspace_zynq/zynq7020/PS_DEV/mio_intr/mio_intr.cache/wt [current_project]
   set_property parent.project_path D:/workspace/workspace_zynq/zynq7020/PS_DEV/mio_intr/mio_intr.xpr [current_project]
   set_property ip_output_repo D:/workspace/workspace_zynq/zynq7020/PS_DEV/mio_intr/mio_intr.cache/ip [current_project]
   set_property ip_cache_permissions {read write} [current_project]
   set_property XPM_LIBRARIES {XPM_CDC XPM_MEMORY} [current_project]
+OPTRACE "set parameters" END { }
+OPTRACE "add files" START { }
+  add_files -quiet D:/workspace/workspace_zynq/zynq7020/PS_DEV/mio_intr/mio_intr.runs/synth_1/zynq7020_wrapper.dcp
+  set_msg_config -source 4 -id {BD 41-1661} -limit 0
+  set_param project.isImplRun true
+  add_files D:/workspace/workspace_zynq/zynq7020/PS_DEV/mio_intr/mio_intr.srcs/sources_1/bd/zynq7020/zynq7020.bd
+  set_param project.isImplRun false
+OPTRACE "read constraints: implementation" START { }
+  read_xdc D:/workspace/workspace_zynq/zynq7020/PS_DEV/mio_intr/mio_intr.srcs/constrs_1/new/zynq7000.xdc
+OPTRACE "read constraints: implementation" END { }
+OPTRACE "add files" END { }
+OPTRACE "link_design" START { }
+  set_param project.isImplRun true
+  link_design -top zynq7020_wrapper -part xc7z020clg400-2 
+OPTRACE "link_design" END { }
+  set_param project.isImplRun false
+OPTRACE "gray box cells" START { }
+OPTRACE "gray box cells" END { }
 OPTRACE "init_design_reports" START { REPORT }
 OPTRACE "init_design_reports" END { }
 OPTRACE "init_design_write_hwdef" START { }

@@ -20,6 +20,7 @@ extern "C"
 
 #include "dido/dido.h"
 #include "uart/uart.h"
+#include "time/time.h"
 
     extern XScuGic InterruptController;
 

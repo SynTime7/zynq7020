@@ -46,6 +46,14 @@ int main()
     Status = uart_init();
     assert(Status == XST_SUCCESS);
 
+    // 初始化私有定时器
+    Status = Priv_TimerInit();
+    assert(Status == XST_SUCCESS);
+
+    // 初始化TTC定时器
+    Status = TTC_TimerInit();
+    assert(Status == XST_SUCCESS);
+
     int flag = 0;
     while (1)
     {

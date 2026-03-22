@@ -59,6 +59,12 @@ module zynq7020_processing_system7_0_0 (
 GPIO_I, 
 GPIO_O, 
 GPIO_T, 
+TTC0_WAVE0_OUT, 
+TTC0_WAVE1_OUT, 
+TTC0_WAVE2_OUT, 
+TTC1_WAVE0_OUT, 
+TTC1_WAVE1_OUT, 
+TTC1_WAVE2_OUT, 
 M_AXI_GP0_ARVALID, 
 M_AXI_GP0_AWVALID, 
 M_AXI_GP0_BREADY, 
@@ -126,6 +132,12 @@ PS_PORB
 input [1 : 0] GPIO_I;
 output [1 : 0] GPIO_O;
 output [1 : 0] GPIO_T;
+output TTC0_WAVE0_OUT;
+output TTC0_WAVE1_OUT;
+output TTC0_WAVE2_OUT;
+output TTC1_WAVE0_OUT;
+output TTC1_WAVE1_OUT;
+output TTC1_WAVE2_OUT;
 output M_AXI_GP0_ARVALID;
 output M_AXI_GP0_AWVALID;
 output M_AXI_GP0_BREADY;
