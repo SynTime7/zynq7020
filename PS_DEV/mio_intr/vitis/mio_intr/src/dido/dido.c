@@ -1,0 +1,178 @@
+#include "../main.h"
+#if 1
+typedef struct
+{
+    int pin_num;     // GPIO引脚编号
+    int direction;   // 0: 输入, 1: 输出
+    int intr_type;   // 0: 上升沿触发, 1: 下降沿触发，2: 双边沿触发, 3: 高电平触发, 4: 低电平触发
+    int intr_enable; // 0: 禁止中断, 1: 使能中断
+} tGpioConfig;
+
+static XGpioPs g_sGpio;            // GPIO实例
+static XGpioPs_Config *GpioConfig; // GPIO配置实例
+
+#define GPIO_DEVICE_ID XPAR_XGPIOPS_0_DEVICE_ID // GPIO设备ID
+#define GPIO_INTERRUPT_ID XPAR_XGPIOPS_0_INTR   // GPIO中断ID
+
+tGpioConfig g_sGpioConfigs[] = {
+    {PS_LED1, 1, 0, 0}, // PS LED1，输出，不使用中断
+    {PS_LED2, 1, 0, 0}, // PS LED2，输出，不使用中断
+    {PS_KEY1, 0, 1, 1}, // PS KEY1，输入，下降沿触发中断
+    {PS_KEY2, 0, 1, 1}, // PS KEY2，输入，下降沿触发中断
+
+    {PL_KEY2, 0, 1, 1}, // PL KEY2，输入，下降沿触发中断
+    {PL_LED1, 1, 0, 0}  // PL LED1，输出，不使用中断
+};
+
+// GPIO中断处理函数
+void gpio_interrupt_handler(void *CallbackRef)
+{
+    XGpioPs *InstancePtr = (XGpioPs *)CallbackRef;
+
+    // 处理GPIO中断，例如读取引脚状态并清除中断
+    for (int i = 0; i < sizeof(g_sGpioConfigs) / sizeof(g_sGpioConfigs[0]); i++)
+    {
+        if (g_sGpioConfigs[i].intr_enable == 1)
+        {
+            // 检测引脚是否产生中断
+            uint32_t intr_status = XGpioPs_IntrGetStatusPin(InstancePtr, g_sGpioConfigs[i].pin_num);
+            if (intr_status != 0)
+            {
+                // 处理该引脚的中断，例如读取引脚状态
+                uint32_t pin_state = XGpioPs_ReadPin(InstancePtr, g_sGpioConfigs[i].pin_num);
+                printf("Interrupt on pin %d, state: %d\n", g_sGpioConfigs[i].pin_num, pin_state);
+
+                // 清除中断
+                XGpioPs_IntrClearPin(InstancePtr, g_sGpioConfigs[i].pin_num);
+            }
+        }
+    }
+}
+
+// GPIO初始化函数
+int gpio_init()
+{
+    int Status;
+
+    // 初始化GPIO实例
+    GpioConfig = XGpioPs_LookupConfig(XPAR_XGPIOPS_0_DEVICE_ID);
+    assert(GpioConfig != NULL);
+    Status = XGpioPs_CfgInitialize(&g_sGpio, GpioConfig, GpioConfig->BaseAddr);
+    assert(Status == XST_SUCCESS);
+
+    // 配置GPIO引脚
+    for (int i = 0; i < sizeof(g_sGpioConfigs) / sizeof(g_sGpioConfigs[0]); i++)
+    {
+        if (g_sGpioConfigs[i].direction == 1)
+        {
+            // 设置引脚为输出
+            XGpioPs_SetDirectionPin(&g_sGpio, g_sGpioConfigs[i].pin_num, 1);
+            // 输出初始状态为低电平
+            XGpioPs_WritePin(&g_sGpio, g_sGpioConfigs[i].pin_num, 0);
+            // 使能引脚的输出功能
+            XGpioPs_SetOutputEnablePin(&g_sGpio, g_sGpioConfigs[i].pin_num, 1);
+        }
+        else
+        {
+            XGpioPs_SetDirectionPin(&g_sGpio, g_sGpioConfigs[i].pin_num, 0);
+            if (g_sGpioConfigs[i].intr_enable == 1)
+            {
+                // 设置中断处理函数
+                XScuGic_SetPriorityTriggerType(&InterruptController, GPIO_INTERRUPT_ID, 0xA0, 0x3);
+                Status = XScuGic_Connect(&InterruptController, GPIO_INTERRUPT_ID, (Xil_InterruptHandler)gpio_interrupt_handler, &g_sGpio);
+                assert(Status == XST_SUCCESS);
+
+                // 配置GPIO中断
+                XGpioPs_SetIntrTypePin(&g_sGpio, g_sGpioConfigs[i].pin_num, g_sGpioConfigs[i].intr_type);
+
+                // 使能GPIO中断
+                XScuGic_Enable(&InterruptController, GPIO_INTERRUPT_ID);
+
+                // 开启中断
+                XGpioPs_IntrEnablePin(&g_sGpio, g_sGpioConfigs[i].pin_num);
+            }
+        }
+    }
+
+    return XST_SUCCESS;
+}
+
+// 设置PS LED状态
+void set_ps_led(uint32_t led_num, uint32_t state)
+{
+    if (led_num == PS_LED1)
+    {
+        XGpioPs_WritePin(&g_sGpio, PS_LED1, state);
+    }
+    else if (led_num == PS_LED2)
+    {
+        XGpioPs_WritePin(&g_sGpio, PS_LED2, state);
+    }
+}
+
+// 设置PL LED状态
+void set_pl_led(uint32_t led_num, uint32_t state)
+{
+    if (led_num == PL_LED1)
+    {
+        XGpioPs_WritePin(&g_sGpio, PL_LED1, state);
+    }
+}
+
+/**********************************************************************
+ * @brief   AXI GPIO中断处理函数
+ * @param  CallbackRef      My Param doc
+ **********************************************************************/
+
+static XGpio g_sGpio_AXI; // AXI GPIO实例
+
+#define AXI_GPIO_DEVICE_ID XPAR_AXI_GPIO_0_DEVICE_ID    // AXI GPIO设备ID
+#define AXI_GPIO_INTERRUPT_ID XPAR_FABRIC_GPIO_0_VEC_ID // AXI GPIO中断ID
+#define AXI_GPIO_CHANNEL 1                              // AXI GPIO通道
+
+// axi gpio 中断处理函数
+void axi_gpio_interrupt_handler(void *CallbackRef)
+{
+    int KEY_flage = 1;
+    XGpio *GpioPtr = (XGpio *)CallbackRef;
+
+    // 关闭 AXI GPIO 中断
+    XGpio_InterruptDisable(GpioPtr, XGPIO_IR_CH1_MASK);
+
+    // 处理AXI GPIO中断，例如读取引脚状态并清除中断
+    uint32_t intr_status = XGpio_DiscreteRead(GpioPtr, AXI_GPIO_CHANNEL);
+    if (intr_status == 0)
+    {
+        printf("AXI GPIO Interrupt, status: %d\n", intr_status);
+    }
+
+    usleep(15000);                                     // 延时消抖
+    XGpio_InterruptClear(GpioPtr, XGPIO_IR_CH1_MASK);  // 清除中断
+    XGpio_InterruptEnable(GpioPtr, XGPIO_IR_CH1_MASK); // 使能中断
+}
+
+// axi gpio初始化函数（如果需要使用AXI GPIO，可以在此处进行初始化）
+int axi_gpio_init()
+{
+    // 初始化AXI GPIO实例
+    XGpio_Initialize(&g_sGpio_AXI, AXI_GPIO_DEVICE_ID);
+
+    // 设置AXI GPIO输入模式
+    XGpio_SetDataDirection(&g_sGpio_AXI, AXI_GPIO_CHANNEL, 1);
+
+    // 使能AXI GPIO中断
+    XGpio_InterruptEnable(&g_sGpio_AXI, XGPIO_IR_CH1_MASK);
+    XGpio_InterruptGlobalEnable(&g_sGpio_AXI);
+
+    // 配置中断优先级与触发方式
+    XScuGic_SetPriorityTriggerType(&InterruptController, AXI_GPIO_INTERRUPT_ID, 0xA0, 0x3);
+
+    // 连接中断处理函数
+    XScuGic_Connect(&InterruptController, AXI_GPIO_INTERRUPT_ID, (Xil_InterruptHandler)axi_gpio_interrupt_handler, &g_sGpio_AXI);
+
+    // 使能中断
+    XScuGic_Enable(&InterruptController, AXI_GPIO_INTERRUPT_ID);
+
+    return XST_SUCCESS;
+}
+#endif

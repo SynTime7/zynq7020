@@ -1,0 +1,5 @@
+set_property SRC_FILE_INFO {cfile:D:/workspace/workspace_zynq/zynq7020/PS_DEV/mio_intr/mio_intr.srcs/constrs_1/new/zynq7000.xdc rfile:../../../mio_intr.srcs/constrs_1/new/zynq7000.xdc id:1} [current_design]
+set_property src_info {type:XDC file:1 line:1 export:INPUT save:INPUT read:READ} [current_design]
+set_property PACKAGE_PIN G20 [get_ports {EMIO_0_0_tri_io[0]}]
+set_property src_info {type:XDC file:1 line:3 export:INPUT save:INPUT read:READ} [current_design]
+set_property PACKAGE_PIN K16 [get_ports {EMIO_0_0_tri_io[1]}]

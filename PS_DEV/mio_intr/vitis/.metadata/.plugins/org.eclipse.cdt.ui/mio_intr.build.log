@@ -1,0 +1,47 @@
+09:47:33 **** Incremental Build of configuration Debug for project mio_intr ****
+make all 
+make --no-print-directory pre-build
+a9-linaro-pre-build-step
+' '
+make --no-print-directory main-build
+'Building file: ../src/dido/dido.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/dido/dido.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -ID:/workspace/workspace_zynq/zynq7020/PS_DEV/mio_intr/vitis/zynq7020_wrapper/export/zynq7020_wrapper/sw/zynq7020_wrapper/standalone_ps7_cortexa9_0/bspinclude/include -MMD -MP -MF"src/dido/dido.d" -MT"src/dido/dido.o" -o "src/dido/dido.o" "../src/dido/dido.c"
+../src/dido/dido.c: In function 'gpio_interrupt_handler':
+../src/dido/dido.c:43:54: warning: format '%d' expects argument of type 'int', but argument 3 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+   43 |                 printf("Interrupt on pin %d, state: %d\n", g_sGpioConfigs[i].pin_num, pin_state);
+      |                                                     ~^                                ~~~~~~~~~
+      |                                                      |                                |
+      |                                                      int                              uint32_t {aka long unsigned int}
+      |                                                     %ld
+../src/dido/dido.c: In function 'axi_gpio_interrupt_handler':
+../src/dido/dido.c:146:46: warning: format '%d' expects argument of type 'int', but argument 2 has type 'uint32_t' {aka 'long unsigned int'} [-Wformat=]
+  146 |         printf("AXI GPIO Interrupt, status: %d\n", intr_status);
+      |                                             ~^     ~~~~~~~~~~~
+      |                                              |     |
+      |                                              int   uint32_t {aka long unsigned int}
+      |                                             %ld
+../src/dido/dido.c:136:9: warning: unused variable 'KEY_flage' [-Wunused-variable]
+  136 |     int KEY_flage = 1;
+      |         ^~~~~~~~~
+'Finished building: ../src/dido/dido.c'
+' '
+'Building file: ../src/main.c'
+'Invoking: ARM v7 gcc compiler'
+arm-none-eabi-gcc -Wall -O0 -g3 -c -fmessage-length=0 -MT"src/main.o" -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -ID:/workspace/workspace_zynq/zynq7020/PS_DEV/mio_intr/vitis/zynq7020_wrapper/export/zynq7020_wrapper/sw/zynq7020_wrapper/standalone_ps7_cortexa9_0/bspinclude/include -MMD -MP -MF"src/main.d" -MT"src/main.o" -o "src/main.o" "../src/main.c"
+'Finished building: ../src/main.c'
+' '
+'Building target: mio_intr.elf'
+'Invoking: ARM v7 gcc linker'
+arm-none-eabi-gcc -mcpu=cortex-a9 -mfpu=vfpv3 -mfloat-abi=hard -Wl,-build-id=none -specs=Xilinx.spec -Wl,-T -Wl,../src/lscript.ld -LD:/workspace/workspace_zynq/zynq7020/PS_DEV/mio_intr/vitis/zynq7020_wrapper/export/zynq7020_wrapper/sw/zynq7020_wrapper/standalone_ps7_cortexa9_0/bsplib/lib -o "mio_intr.elf"  ./src/dido/dido.o  ./src/main.o ./src/platform.o   -Wl,--start-group,-lxil,-lgcc,-lc,--end-group
+'Finished building target: mio_intr.elf'
+' '
+'Invoking: ARM v7 Print Size'
+arm-none-eabi-size mio_intr.elf  |tee "mio_intr.elf.size"
+   text	   data	    bss	    dec	    hex	filename
+  64747	   3444	  22728	  90919	  16327	mio_intr.elf
+'Finished building: mio_intr.elf.size'
+' '
+
+09:47:36 Build Finished (took 3s.3ms)
+

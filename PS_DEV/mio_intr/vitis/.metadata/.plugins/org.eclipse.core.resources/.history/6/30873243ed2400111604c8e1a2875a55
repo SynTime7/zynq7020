@@ -1,0 +1,98 @@
+#include <stdio.h>
+#include "xparameters.h"
+#include "platform.h"
+#include "xil_printf.h"
+#include "xgpiops.h"
+#include <assert.h>
+
+#define PS_LED1 0 // ps_led1 固定为mio0
+#define PS_LED2 9 // ps_led2 固定为mio9
+
+#define PL_KEY2 54 // pl_key2 固定为emio54
+#define PL_LED1 55 // pl_led1 固定为emio55
+
+XGpioPs Gpio;               // GPIO实例
+XGpioPs_Config *GpioConfig; // GPIO配置实例
+
+int gpio_init()
+{
+    int Status;
+
+    // 初始化GPIO实例
+    GpioConfig = XGpioPs_LookupConfig(XPAR_XGPIOPS_0_DEVICE_ID);
+    assert(GpioConfig != NULL);
+    Status = XGpioPs_CfgInitialize(&Gpio, GpioConfig, GpioConfig->BaseAddr);
+    assert(Status == XST_SUCCESS);
+
+    // 设置PS LED为输出
+    XGpioPs_SetDirectionPin(&Gpio, PS_LED1, 1); // 设置mio0为输出
+    XGpioPs_SetDirectionPin(&Gpio, PS_LED2, 1); // 设置mio9为输出
+
+    // 使能PS LED
+    XGpioPs_SetOutputEnablePin(&Gpio, PS_LED1, 1); // 使能mio0输出
+    XGpioPs_SetOutputEnablePin(&Gpio, PS_LED2, 1); // 使能mio9输出
+
+    // 设置PL KEY为输入
+    XGpioPs_SetDirectionPin(&Gpio, PL_KEY2, 0); // 设置emio54为输入
+
+    // 设置PL LED为输出
+    XGpioPs_SetDirectionPin(&Gpio, PL_LED1, 1);    // 设置emio55为输出
+    XGpioPs_SetOutputEnablePin(&Gpio, PL_LED1, 1); // 使能emio55输出
+
+    return XST_SUCCESS;
+}
+
+// 控制PS LED状态
+void set_ps_led(u32 led_num, u32 state)
+{
+    if (led_num == 1)
+    {
+        XGpioPs_WritePin(&Gpio, PS_LED1, state); // 控制mio0
+    }
+    else if (led_num == 2)
+    {
+        XGpioPs_WritePin(&Gpio, PS_LED2, state); // 控制mio9
+    }
+}
+
+// 控制PL LED状态
+void set_pl_led(u32 led_num, u32 state)
+{
+    if (led_num == 1)
+    {
+        XGpioPs_WritePin(&Gpio, PL_LED1, state); // 控制emio55
+    }
+}
+
+int main()
+{
+    init_platform();
+
+    // 初始化GPIO
+    int Status = gpio_init();
+    assert(Status == XST_SUCCESS);
+
+    // 主循环，监测PL KEY状态并控制LED
+    while (1)
+    {
+        // 读取PL KEY状态
+        u32 key_state = XGpioPs_ReadPin(&Gpio, PL_KEY2); // 读取emio54
+
+        // 根据KEY状态控制LED
+        if (key_state == 0)
+        {                     // 按键按下（假设低电平有效）
+            set_ps_led(1, 1); // 打开PS LED1
+            set_ps_led(2, 1); // 打开PS LED2
+            set_pl_led(1, 1); // 打开PL LED1
+        }
+        else
+        {
+            set_ps_led(1, 0); // 关闭PS LED1
+            set_ps_led(2, 0); // 关闭PS LED2
+            set_pl_led(1, 0); // 关闭PL LED1
+        }
+    }
+
+    cleanup_platform();
+    return 0;
+}

@@ -1,0 +1,67 @@
+#include "dido.h"
+#include "platform.h"
+#include "xil_printf.h"
+#include "xgpiops.h"
+
+static XGpioPs Gpio;               // GPIO实例
+static XGpioPs_Config *GpioConfig; // GPIO配置实例
+
+int gpio_init()
+{
+    int Status;
+
+    // 初始化GPIO实例
+    GpioConfig = XGpioPs_LookupConfig(XPAR_XGPIOPS_0_DEVICE_ID);
+    assert(GpioConfig != NULL);
+    Status = XGpioPs_CfgInitialize(&Gpio, GpioConfig, GpioConfig->BaseAddr);
+    assert(Status == XST_SUCCESS);
+
+    // 设置PS LED为输出
+    XGpioPs_SetDirectionPin(&Gpio, PS_LED1, 1); // 设置mio0为输出
+    XGpioPs_SetDirectionPin(&Gpio, PS_LED2, 1); // 设置mio9为输出
+
+    // 使能PS LED
+    XGpioPs_SetOutputEnablePin(&Gpio, PS_LED1, 1); // 使能mio0输出
+    XGpioPs_SetOutputEnablePin(&Gpio, PS_LED2, 1); // 使能mio9输出
+
+    // 设置PL KEY为输入
+    XGpioPs_SetDirectionPin(&Gpio, PL_KEY2, 0); // 设置emio54为输入
+
+    // 设置PL LED为输出
+    XGpioPs_SetDirectionPin(&Gpio, PL_LED1, 1);    // 设置emio55为输出
+    XGpioPs_SetOutputEnablePin(&Gpio, PL_LED1, 1); // 使能emio55输出
+
+    return XST_SUCCESS;
+}
+
+// 控制PS LED状态
+void set_ps_led(u32 led_num, u32 state)
+{
+    if (led_num == 1)
+    {
+        XGpioPs_WritePin(&Gpio, PS_LED1, state); // 控制mio0
+    }
+    else if (led_num == 2)
+    {
+        XGpioPs_WritePin(&Gpio, PS_LED2, state); // 控制mio9
+    }
+}
+
+// 控制PL LED状态
+void set_pl_led(u32 led_num, u32 state)
+{
+    if (led_num == 1)
+    {
+        XGpioPs_WritePin(&Gpio, PL_LED1, state); // 控制emio55
+    }
+}
+
+// 读取PL KEY状态
+u32 read_pl_key(u32 key_num)
+{
+    if (key_num == 2)
+    {
+        return XGpioPs_ReadPin(&Gpio, PL_KEY2); // 读取emio54
+    }
+    return 0xFFFFFFFF; // 无效KEY返回错误值
+}

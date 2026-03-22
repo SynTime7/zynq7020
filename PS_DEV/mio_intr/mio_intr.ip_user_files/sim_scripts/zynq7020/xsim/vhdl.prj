@@ -1,0 +1,5 @@
+vhdl xil_defaultlib  \
+"../../../../mio_intr.gen/sources_1/bd/zynq7020/ip/zynq7020_axi_gpio_0_0/sim/zynq7020_axi_gpio_0_0.vhd" \
+"../../../../mio_intr.gen/sources_1/bd/zynq7020/ip/zynq7020_rst_ps7_0_50M_0/sim/zynq7020_rst_ps7_0_50M_0.vhd" \
+
+nosort

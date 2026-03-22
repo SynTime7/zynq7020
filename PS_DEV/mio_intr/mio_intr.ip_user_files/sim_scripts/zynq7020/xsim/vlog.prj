@@ -1,0 +1,8 @@
+verilog xil_defaultlib --include "D:/Xilinx/Vivado/2022.2/data/xilinx_vip/include" --include "../../../../mio_intr.gen/sources_1/bd/zynq7020/ipshared/ec67/hdl" --include "../../../../mio_intr.gen/sources_1/bd/zynq7020/ipshared/ee60/hdl" \
+"../../../../mio_intr.gen/sources_1/bd/zynq7020/ip/zynq7020_processing_system7_0_0/sim/zynq7020_processing_system7_0_0.v" \
+"../../../../mio_intr.gen/sources_1/bd/zynq7020/sim/zynq7020.v" \
+"../../../../mio_intr.gen/sources_1/bd/zynq7020/ip/zynq7020_auto_pc_0/sim/zynq7020_auto_pc_0.v" \
+
+verilog xil_defaultlib "glbl.v"
+
+nosort
